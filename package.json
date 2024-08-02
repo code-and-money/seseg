@@ -1,10 +1,14 @@
 {
   "name": "@alexvyber/classic",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "",
   "keywords": [],
   "license": "ISC",
+  "publishConfig": {
+    "access": "public"
+  },
   "author": "",
+  "files": ["dist/"],
   "exports": {
     ".": {
       "import": "./dist/index.mjs",
@@ -12,7 +16,7 @@
       "types": "./dist/index.d.ts"
     }
   },
-  "main": "index.js",
+  "main": "./dist/index.mjs",
   "scripts": {
     "build": "rm -rf dist && pnpm build:cjs && pnpm build:esm && pnpm build:tsc && pnpm build:umd",
     "build:cjs": "swc ./src/index.ts --config-file ./.config/.swcrc -o dist/index.js  -C module.type=commonjs",
