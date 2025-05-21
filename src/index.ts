@@ -7,7 +7,7 @@ export type ClassDictionary = Record<string, ClassValue[] | string | number | nu
  *
  * @example
  * ```ts
- * import classic from "@alexvyber/classic";
+ * import { classic } from "@alexvyber/classic";
  *
  * classic(
  *   { className: ["foo", { bar: true, className: "buz" }] },
@@ -47,14 +47,14 @@ function produceClasses(classes: ClassValue) {
     } else {
       for (const key of Object.keys(classes)) {
         if (key === 'class' || key === 'className') str += produceClasses(classes[key])
-        else if (classes[key] && typeof classes[key] !== 'function') str += `${key} `
+        else if (classes[key] && typeof classes[key] !== 'function') str += key
       }
     }
 
     return str
   }
 
-  return `${classes} `
+  return classes.toString()
 }
 
-export { classic, classic as default }
+export { classic }
