@@ -47,7 +47,7 @@ function produceClasses(classes: ClassValue) {
     } else {
       for (const key of Object.keys(classes)) {
         if (key === 'class' || key === 'className') str += produceClasses(classes[key])
-        else if (classes[key] && typeof classes[key] !== 'function') str += key
+        else if (classes[key] && typeof classes[key] !== 'function') str += key + ' '
       }
     }
 
