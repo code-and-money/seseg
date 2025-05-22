@@ -1,5 +1,5 @@
 import test, { describe } from 'node:test'
-import classic, { ClassValue } from './index.js'
+import { classic, ClassValue } from './index.js'
 import assert from 'node:assert/strict'
 
 test('keeps object keys with truthy values', () => {

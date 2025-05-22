@@ -54,7 +54,7 @@ function produceClasses(classes: ClassValue) {
     return str
   }
 
-  return classes.toString()
+  return classes.toString()  + ' '
 }
 
 export { classic }
