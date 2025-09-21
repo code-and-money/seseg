@@ -1,64 +1,49 @@
 # seseg
 
-This module is available in three formats:
-
-- **ES Module**: `dist/index.mjs`
-- **CommonJS**: `dist/index.js`
-- **UMD**: `dist/index.min.js`
-
 ## Install
 
 ```bash
-npm install @alexvyber/seseg
-```
-
-```bash
-pnpm add @alexvyber/seseg
-```
-
-```bash
-pnpm yarn @alexvyber/seseg
+deno add jsr:@codeandmoney/seseg
 ```
 
 ## Usage
 
-```js
-import seseg from "@alexvyber/seseg"
+```ts
+import { seseg } from "@codeandmoney/seseg"
 // or
-import { seseg } from "@alexvyber/seseg"
+import { classes } from "@codeandmoney/seseg"
 
-// returns 'border italic underline text-2xl bg-red-500'
+seseg( { className: "some", class: "otger" } ) // "some other"
+
 seseg(
   { className: [ "border", { italic: true, className: "underline" } ] },
   "text-2xl",
   [ "bg-red-500" ],
 )
+// 'border italic underline text-2xl bg-red-500'
 
-// 'border italic underline'
-seseg( "border", true && "italic", "underline" )
+seseg( "border", true && "italic", "underline" ) // 'border italic underline'
 
-// 'border underline'
-seseg( { border: true, italic: false, underline: true } )
+seseg( { border: true, italic: false, underline: true } ) // 'border underline'
 
-// 'border --adhoc'
 seseg( { border: true }, { italic: false }, null, {
   "--adhoc": "some truthy value",
 } )
+// 'border --adhoc'
 
-// 'border italic'
-seseg( [ "border", 0, false, "italic" ] )
+seseg( [ "border", 0, false, "italic" ] ) // 'border italic'
 
-// 'border italic underline bg-red-500 text-lg'
 seseg(
   [ "border" ],
   [ "", 0, false, "italic" ],
   [ [ "underline", [ [ "bg-red-500" ], "text-lg" ] ] ],
 )
+// 'border italic underline bg-red-500 text-lg'
 
-// 'border italic bg-red-500 text-lg adhoc'
 seseg(
   "border",
   [ 1 && "italic", { underline: false, bat: null }, [ "bg-red-500", [ "text-lg" ] ] ],
   "adhoc",
 )
+// 'border italic bg-red-500 text-lg adhoc'
 ```
