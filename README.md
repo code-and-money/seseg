@@ -1,64 +1,64 @@
-# classic
+# seseg
 
 This module is available in three formats:
 
 - **ES Module**: `dist/index.mjs`
-- **CommonJS**:  `dist/index.js`
-- **UMD**:       `dist/index.min.js`
+- **CommonJS**: `dist/index.js`
+- **UMD**: `dist/index.min.js`
 
 ## Install
 
 ```bash
-npm install @alexvyber/classic
+npm install @alexvyber/seseg
 ```
 
 ```bash
-pnpm add @alexvyber/classic
+pnpm add @alexvyber/seseg
 ```
 
 ```bash
-pnpm yarn @alexvyber/classic
+pnpm yarn @alexvyber/seseg
 ```
 
 ## Usage
 
 ```js
-import classic from "@alexvyber/classic";
+import seseg from "@alexvyber/seseg"
 // or
-import { classic } from "@alexvyber/classic";
+import { seseg } from "@alexvyber/seseg"
 
 // returns 'border italic underline text-2xl bg-red-500'
-classic(
-  { className: ["border", { italic: true, className: "underline" }] },
+seseg(
+  { className: [ "border", { italic: true, className: "underline" } ] },
   "text-2xl",
-  ["bg-red-500"],
-);
+  [ "bg-red-500" ],
+)
 
 // 'border italic underline'
-classic("border", true && "italic", "underline");
+seseg( "border", true && "italic", "underline" )
 
 // 'border underline'
-classic({ border: true, italic: false, underline: true });
+seseg( { border: true, italic: false, underline: true } )
 
 // 'border --adhoc'
-classic({ border: true }, { italic: false }, null, {
+seseg( { border: true }, { italic: false }, null, {
   "--adhoc": "some truthy value",
-});
+} )
 
 // 'border italic'
-classic(["border", 0, false, "italic"]);
+seseg( [ "border", 0, false, "italic" ] )
 
 // 'border italic underline bg-red-500 text-lg'
-classic(
-  ["border"],
-  ["", 0, false, "italic"],
-  [["underline", [["bg-red-500"], "text-lg"]]],
-);
+seseg(
+  [ "border" ],
+  [ "", 0, false, "italic" ],
+  [ [ "underline", [ [ "bg-red-500" ], "text-lg" ] ] ],
+)
 
 // 'border italic bg-red-500 text-lg adhoc'
-classic(
+seseg(
   "border",
-  [1 && "italic", { underline: false, bat: null }, ["bg-red-500", ["text-lg"]]],
+  [ 1 && "italic", { underline: false, bat: null }, [ "bg-red-500", [ "text-lg" ] ] ],
   "adhoc",
-);
+)
 ```
