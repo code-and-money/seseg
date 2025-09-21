@@ -1,8 +1,6 @@
 import { type ClassValue, seseg } from "./mod.ts"
 import { assertStrictEquals } from "@std/assert"
 
-console.log( `🚀 ~ seseg( { className: "some", class: "otger" } ):`, seseg( { className: "some", class: "other" } ) )
-
 Deno.test("keeps object keys with truthy values", () => {
   assertStrictEquals( seseg( { one: true, two: false, three: 0, four: null, five: undefined, six: 1 } ), "one six" )
 })
