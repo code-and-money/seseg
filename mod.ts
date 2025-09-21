@@ -51,7 +51,7 @@ function seseg( ...classes: ClassValue[] ): string {
   return str.trim()
 }
 
-function produceClasses( classes: ClassValue ) {
+function produceClasses( classes: ClassValue ): string {
   if ( typeof classes === "boolean" || !classes || typeof classes === "function" ) {
     return ""
   }

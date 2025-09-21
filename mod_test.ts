@@ -15,16 +15,27 @@ Deno.test("handles arrays that include falsy and true values", () => {
 
 Deno.test("supports heterogenous arguments", () => {
   assertStrictEquals(
-    seseg( { one: true }, "two", 0, false, "five", [ [ { six: true } ] ], {
-      className: [ { seven: false }, [ [ { eight: true } ] ] ],
-    } ),
-    "one two five six eight",
+    seseg(
+      0,
+      false,
+      "two",
+      "five",
+      { one: true },
+      [ [ { six: true } ] ],
+      {
+        className: [
+          { seven: false },
+          [ [ { eight: true } ] ],
+        ],
+      },
+    ),
+    "two five one six eight",
   )
 })
 
 Deno.test("should be trimmed", () => {
   assertStrictEquals(
-    seseg( "", "                   two             three            ", {
+    seseg( "", "           \n\n\n       two          \n\n\n  \r\n  three    \n\n\n         ", {
       four: true,
       "                five              ": true,
     }, "" ).replace( /\s+/g, " " ),
