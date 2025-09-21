@@ -7,6 +7,13 @@
   "publishConfig": {
     "access": "public"
   },
+  "contributors": [
+    {
+      "name": "Alexey Sokolov",
+      "email": "alexey@codeandmoney.com",
+      "url": "https://codeandmoney.com"
+    }
+  ],
   "fmt": {
     "semiColons": false,
     "trailingCommas": "onlyMultiLine",
@@ -16,9 +23,6 @@
     "spaceAround": true
   },
   "author": "",
-  "files": [
-    "dist/"
-  ],
   "exports": {
     ".": "./mod.ts"
   },
