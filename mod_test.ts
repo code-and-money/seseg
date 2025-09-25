@@ -22,12 +22,7 @@ Deno.test("supports heterogenous arguments", () => {
       "five",
       { one: true },
       [ [ { six: true } ] ],
-      {
-        className: [
-          { seven: false },
-          [ [ { eight: true } ] ],
-        ],
-      },
+      { className: [ { seven: false }, [ [ { eight: true } ] ] ] },
     ),
     "two five one six eight",
   )
@@ -35,10 +30,21 @@ Deno.test("supports heterogenous arguments", () => {
 
 Deno.test("should be trimmed", () => {
   assertStrictEquals(
-    seseg( "", "           \n\n\n       two          \n\n\n  \r\n  three    \n\n\n         ", {
-      four: true,
-      "                five              ": true,
-    }, "" ).replace( /\s+/g, " " ),
+    seseg(
+      "",
+      `          \n\n\n       two       
+      
+      
+      
+      \n\n\n  \r\n  three    \n\n\n    \n\r \r\n
+       
+      
+       
+       
+      `,
+      { four: true, "                five              ": true },
+      "",
+    ),
     "two three four five",
   )
 })
@@ -178,10 +184,7 @@ Deno.test("objects (variadic)", () => {
   assertStrictEquals( seseg( {}, {} ), "" )
   assertStrictEquals( seseg( { foo: 1 }, { bar: 2 } ), "foo bar" )
   assertStrictEquals( seseg( { foo: 1 }, null, { baz: 1, bat: 0 } ), "foo baz" )
-  assertStrictEquals(
-    seseg( { foo: 1 }, {}, {}, { bar: "a" }, { baz: null, bat: Number.POSITIVE_INFINITY } ),
-    "foo bar bat",
-  )
+  assertStrictEquals( seseg( { foo: 1 }, { bar: "a" }, { baz: null, bat: Number.POSITIVE_INFINITY } ), "foo bar bat" )
 })
 
 Deno.test("arrays", () => {
@@ -218,7 +221,7 @@ Deno.test("functions", () => {
   // @ts-expect-error typings
   assertStrictEquals( seseg( foo, "hello", seseg ), "hello" )
   // @ts-expect-error typings
-  assertStrictEquals( seseg( foo, "hello", [ [ seseg ], "world" ] ), "hello world" )
+  assertStrictEquals( seseg( foo, "hello", [ foo, [ foo, seseg ], "world" ] ), "hello world" )
 })
 
 Deno.test("seseg", () => {

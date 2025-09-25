@@ -17,7 +17,15 @@ export type ClassDictionary = Record<
   | null
   | boolean
   | undefined
-  | Record<string, ClassValue[] | string | number | null | boolean | undefined>
+  | Record<
+    string,
+    | ClassValue[]
+    | string
+    | number
+    | null
+    | boolean
+    | undefined
+  >
 >
 
 /**
@@ -45,31 +53,39 @@ function seseg( ...classes: ClassValue[] ): string {
   const length = classes.length
 
   while ( i < length ) {
-    if ( ( tmp = classes[i++] ) ) str += produceClasses( tmp )
+    if ( ( tmp = classes[i++] ) ) {
+      str += produceClasses( tmp )
+    }
   }
 
-  return str.trim()
+  return str.trim().replace( /\s+/g, " " )
 }
 
 function produceClasses( classes: ClassValue ): string {
-  if ( typeof classes === "boolean" || !classes || typeof classes === "function" ) {
+  if ( !classes || typeof classes === "boolean" || typeof classes === "function" ) {
     return ""
   }
 
   if ( typeof classes === "object" ) {
+    if ( Array.isArray( classes ) ) {
+      let str = ""
+
+      for ( const item of classes.flat( Number.MAX_SAFE_INTEGER as 0 ) ) {
+        if ( item ) {
+          str += produceClasses( item )
+        }
+      }
+
+      return str
+    }
+
     let str = ""
 
-    if ( Array.isArray( classes ) ) {
-      for ( const item of classes.flat( Number.MAX_SAFE_INTEGER as 0 ) ) {
-        if ( item ) str += produceClasses( item )
-      }
-    } else {
-      for ( const key of Object.keys( classes ) ) {
-        if ( key === "class" || key === "className" ) {
-          str += produceClasses( classes[key] )
-        } else if ( classes[key] && typeof classes[key] !== "function" ) {
-          str += key + " "
-        }
+    for ( const key of Object.keys( classes ) ) {
+      if ( key === "class" || key === "className" ) {
+        str += produceClasses( classes[key] )
+      } else if ( classes[key] && typeof classes[key] !== "function" ) {
+        str += key + " "
       }
     }
 
